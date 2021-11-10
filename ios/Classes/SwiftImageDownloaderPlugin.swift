@@ -90,7 +90,8 @@ public class SwiftImageDownloaderPlugin: NSObject, FlutterPlugin {
 
     private func downloadImage(_ url: String, _ headers: [String: String]?, _ result: @escaping FlutterResult) {
         let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.main)
-        let url = URL(string: url)!
+        let encodedString = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let url = URL(string: encodedString)!
         var request = URLRequest(url: url)
 
         if let headers = headers {
